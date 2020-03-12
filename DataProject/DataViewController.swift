@@ -18,7 +18,7 @@ class DataViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let request = NasaRequest()
         let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
-        let photo = nasaData[indexPath.row].photos[indexPath.row]
+        let photo = nasaData[indexPath.row]
         if let url = URL(string: photo.img_src) {
             URLSession.shared.downloadTask(with: request.resourceUrl){
                 url, URLResponse, error in
@@ -39,7 +39,7 @@ class DataViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     @IBOutlet weak var tableView: UITableView!
     
-    var nasaData = [MarsPhotos]() {
+    var nasaData = [Photo]() {
         didSet {
             DispatchQueue.main.async { [weak self] in
                 self?.tableView?.reloadData()
@@ -58,7 +58,7 @@ class DataViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.tableView?.dataSource = self
     }
     
-    func dlJSON(completion: @escaping (Result<[MarsPhotos], NasaError>) -> Void) {
+    func dlJSON(completion: @escaping (Result<[Photo], NasaError>) -> Void) {
         let request = NasaRequest()
         URLSession.shared.dataTask(with: request.resourceUrl) {(data, response, err) in
             guard let data = data else {
@@ -68,7 +68,7 @@ class DataViewController: UIViewController, UITableViewDelegate, UITableViewData
             //        let dataAsString = String(data: data, encoding: .utf8)
             //        print(dataAsString as Any)
             do {
-                            let nasaDescription = try JSONDecoder().decode(MarsPhotos.self, from: data)
+                            let nasaDescription = try JSONDecoder().decode(Photo.self, from: data)
                             self.nasaData = [nasaDescription]
                 completion(.success(self.nasaData))
                 print(nasaDescription)
@@ -93,6 +93,28 @@ class DataViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     }.resume()
 }
+}
+
+extension UIImageView {
+    func downloaded(from url: URL, contentMode mode: UIView.ContentMode = .scaleAspectFit) {
+        contentMode = mode
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            guard
+                let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
+                let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
+                let data = data, error == nil,
+                let image = UIImage(data: data)
+                else { return }
+            DispatchQueue.main.async() {
+                self.image = image
+            }
+        }.resume()
+    }
+    
+    func downloaded(from link: String, contentMode mode: UIView.ContentMode = .scaleAspectFit) {
+        guard let url = URL(string: link) else { return }
+        downloaded(from: url, contentMode: mode)
+    }
 }
 
 //initializer isnt needed anymore. JSONDecoder() decodes by setting up all properties automatically based on what is inside JSON object
