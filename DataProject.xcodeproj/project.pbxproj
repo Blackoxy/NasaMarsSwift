@@ -16,7 +16,8 @@
 		BD8C657F2419754800DC34B8 /* DataProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8C657E2419754800DC34B8 /* DataProjectTests.swift */; };
 		BD8C658A2419754800DC34B8 /* DataProjectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8C65892419754800DC34B8 /* DataProjectUITests.swift */; };
 		BD8C659A2419A32900DC34B8 /* NasaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8C65992419A32900DC34B8 /* NasaTableViewCell.swift */; };
-		BD8C659C241AA8AB00DC34B8 /* NasaDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8C659B241AA8AB00DC34B8 /* NasaDataManager.swift */; };
+		BD8C659C241AA8AB00DC34B8 /* NasaDataPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8C659B241AA8AB00DC34B8 /* NasaDataPayload.swift */; };
+		BD8C659E241AD6FF00DC34B8 /* NasaDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8C659D241AD6FF00DC34B8 /* NasaDataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,7 +53,8 @@
 		BD8C65892419754800DC34B8 /* DataProjectUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProjectUITests.swift; sourceTree = "<group>"; };
 		BD8C658B2419754800DC34B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BD8C65992419A32900DC34B8 /* NasaTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NasaTableViewCell.swift; sourceTree = "<group>"; };
-		BD8C659B241AA8AB00DC34B8 /* NasaDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NasaDataManager.swift; sourceTree = "<group>"; };
+		BD8C659B241AA8AB00DC34B8 /* NasaDataPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NasaDataPayload.swift; sourceTree = "<group>"; };
+		BD8C659D241AD6FF00DC34B8 /* NasaDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NasaDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,7 +108,8 @@
 				BD8C65672419754600DC34B8 /* AppDelegate.swift */,
 				BD8C65692419754600DC34B8 /* SceneDelegate.swift */,
 				BD8C65992419A32900DC34B8 /* NasaTableViewCell.swift */,
-				BD8C659B241AA8AB00DC34B8 /* NasaDataManager.swift */,
+				BD8C659D241AD6FF00DC34B8 /* NasaDataManager.swift */,
+				BD8C659B241AA8AB00DC34B8 /* NasaDataPayload.swift */,
 				BD8C656B2419754600DC34B8 /* DataViewController.swift */,
 				BD8C65722419754800DC34B8 /* LaunchScreen.storyboard */,
 				BD8C656D2419754600DC34B8 /* Main.storyboard */,
@@ -265,8 +268,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BD8C659E241AD6FF00DC34B8 /* NasaDataManager.swift in Sources */,
 				BD8C656C2419754600DC34B8 /* DataViewController.swift in Sources */,
-				BD8C659C241AA8AB00DC34B8 /* NasaDataManager.swift in Sources */,
+				BD8C659C241AA8AB00DC34B8 /* NasaDataPayload.swift in Sources */,
 				BD8C65682419754600DC34B8 /* AppDelegate.swift in Sources */,
 				BD8C656A2419754600DC34B8 /* SceneDelegate.swift in Sources */,
 				BD8C659A2419A32900DC34B8 /* NasaTableViewCell.swift in Sources */,

@@ -26,6 +26,6 @@ class NasaTableViewCell: UITableViewCell {
     @IBOutlet weak var earthDateLabel: UILabel!
     
     public func setProfilePicture(_ image: UIImage?, forPayload payload: Photo) {
-
+        
     }
 }

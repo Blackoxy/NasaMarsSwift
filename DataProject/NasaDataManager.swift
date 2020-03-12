@@ -8,38 +8,15 @@
 
 import Foundation
 
-struct MarsPhotos: Decodable{
-    let photos: [Photo]
-}
-struct Photo: Decodable {
-    let id: Int?
-    let sol: Int?
-    let camera: Camera
-    let img_src: String
-    let earth_date: String
-    let rover: Rover
-}
-
-struct Camera: Decodable {
-    let id: Int?
-    let name: String
-    let rover_id: Int
-    let full_name: String
+struct NasaRequest {
+    let resourceUrl: URL
+    let API_KEY = "W02q5h7TG6f54N0P39quJ0zh0pZ8YdcGqIVwvPIy"
+    
+    init() {
+        let earthDate = "2015-6-3"
+        let resourceString = "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=\(earthDate)&api_key=\(API_KEY))"
+        guard let resourceUrl = URL(string: resourceString) else {fatalError()}
+        self.resourceUrl = resourceUrl
+    }
 }
 
-struct Rover: Decodable {
-    let id: Int?
-    let name: String
-    let landing_date: String
-    let launch_date: String
-    let status: String
-    let max_sol: Int
-    let max_date: String
-    let total_photos: Int
-    let cameras: [RoverCameras]
-}
-
-struct RoverCameras: Decodable {
-    let name: String
-    let full_name: String
-}
