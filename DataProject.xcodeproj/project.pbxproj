@@ -9,12 +9,14 @@
 /* Begin PBXBuildFile section */
 		BD8C65682419754600DC34B8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8C65672419754600DC34B8 /* AppDelegate.swift */; };
 		BD8C656A2419754600DC34B8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8C65692419754600DC34B8 /* SceneDelegate.swift */; };
-		BD8C656C2419754600DC34B8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8C656B2419754600DC34B8 /* ViewController.swift */; };
+		BD8C656C2419754600DC34B8 /* DataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8C656B2419754600DC34B8 /* DataViewController.swift */; };
 		BD8C656F2419754600DC34B8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD8C656D2419754600DC34B8 /* Main.storyboard */; };
 		BD8C65712419754800DC34B8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BD8C65702419754800DC34B8 /* Assets.xcassets */; };
 		BD8C65742419754800DC34B8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD8C65722419754800DC34B8 /* LaunchScreen.storyboard */; };
 		BD8C657F2419754800DC34B8 /* DataProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8C657E2419754800DC34B8 /* DataProjectTests.swift */; };
 		BD8C658A2419754800DC34B8 /* DataProjectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8C65892419754800DC34B8 /* DataProjectUITests.swift */; };
+		BD8C659A2419A32900DC34B8 /* NasaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8C65992419A32900DC34B8 /* NasaTableViewCell.swift */; };
+		BD8C659C241AA8AB00DC34B8 /* NasaDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8C659B241AA8AB00DC34B8 /* NasaDataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,7 +40,7 @@
 		BD8C65642419754600DC34B8 /* DataProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DataProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD8C65672419754600DC34B8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BD8C65692419754600DC34B8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		BD8C656B2419754600DC34B8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		BD8C656B2419754600DC34B8 /* DataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataViewController.swift; sourceTree = "<group>"; };
 		BD8C656E2419754600DC34B8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BD8C65702419754800DC34B8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BD8C65732419754800DC34B8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -49,6 +51,8 @@
 		BD8C65852419754800DC34B8 /* DataProjectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DataProjectUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD8C65892419754800DC34B8 /* DataProjectUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProjectUITests.swift; sourceTree = "<group>"; };
 		BD8C658B2419754800DC34B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BD8C65992419A32900DC34B8 /* NasaTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NasaTableViewCell.swift; sourceTree = "<group>"; };
+		BD8C659B241AA8AB00DC34B8 /* NasaDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NasaDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,10 +105,12 @@
 			children = (
 				BD8C65672419754600DC34B8 /* AppDelegate.swift */,
 				BD8C65692419754600DC34B8 /* SceneDelegate.swift */,
-				BD8C656B2419754600DC34B8 /* ViewController.swift */,
+				BD8C65992419A32900DC34B8 /* NasaTableViewCell.swift */,
+				BD8C659B241AA8AB00DC34B8 /* NasaDataManager.swift */,
+				BD8C656B2419754600DC34B8 /* DataViewController.swift */,
+				BD8C65722419754800DC34B8 /* LaunchScreen.storyboard */,
 				BD8C656D2419754600DC34B8 /* Main.storyboard */,
 				BD8C65702419754800DC34B8 /* Assets.xcassets */,
-				BD8C65722419754800DC34B8 /* LaunchScreen.storyboard */,
 				BD8C65752419754800DC34B8 /* Info.plist */,
 			);
 			path = DataProject;
@@ -259,9 +265,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BD8C656C2419754600DC34B8 /* ViewController.swift in Sources */,
+				BD8C656C2419754600DC34B8 /* DataViewController.swift in Sources */,
+				BD8C659C241AA8AB00DC34B8 /* NasaDataManager.swift in Sources */,
 				BD8C65682419754600DC34B8 /* AppDelegate.swift in Sources */,
 				BD8C656A2419754600DC34B8 /* SceneDelegate.swift in Sources */,
+				BD8C659A2419A32900DC34B8 /* NasaTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
