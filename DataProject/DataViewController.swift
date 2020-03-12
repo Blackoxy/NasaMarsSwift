@@ -11,27 +11,6 @@ import UIKit
 
 class DataViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return nasaData.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let request = NasaRequest()
-        let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
-        let photo = nasaData[indexPath.row]
-        if let url = URL(string: photo.img_src) {
-            URLSession.shared.downloadTask(with: request.resourceUrl){
-                url, URLResponse, error in
-                if let url = url {
-                    if let string = try? String(contentsOf: url){
-                        print(string)
-                    }
-                }
-            }
-        }
-        return cell
-    }
-    
     public static func create() -> DataViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         return storyboard.instantiateInitialViewController() as! DataViewController
@@ -65,25 +44,12 @@ class DataViewController: UIViewController, UITableViewDelegate, UITableViewData
                 completion(.failure(.noDataAvailable))
                 return
             }
-            //        let dataAsString = String(data: data, encoding: .utf8)
-            //        print(dataAsString as Any)
+
             do {
                             let nasaDescription = try JSONDecoder().decode(Photo.self, from: data)
                             self.nasaData = [nasaDescription]
                 completion(.success(self.nasaData))
                 print(nasaDescription)
-                
-//                let courses =  try
-//                    JSONDecoder().decode([Course].self, from: data)
-//                DispatchQueue.main.async {
-//                    completed()
-//                }
-//                print(courses)
-                
-                //            guard let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] else { return }
-                //            let course = Course(json: json)
-                //            print(course.name)
-                
                 
             } catch let jsonErr{
                 completion(.failure(.cantProcessData))
@@ -93,6 +59,27 @@ class DataViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     }.resume()
 }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return nasaData.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let request = NasaRequest()
+        let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
+        let photo = nasaData[indexPath.row]
+        if let url = URL(string: photo.img_src) {
+            URLSession.shared.downloadTask(with: request.resourceUrl){
+                url, URLResponse, error in
+                if let url = url {
+                    if let string = try? String(contentsOf: url){
+                        print(string)
+                    }
+                }
+            }
+        }
+        return cell
+    }
 }
 
 extension UIImageView {
@@ -116,5 +103,3 @@ extension UIImageView {
         downloaded(from: url, contentMode: mode)
     }
 }
-
-//initializer isnt needed anymore. JSONDecoder() decodes by setting up all properties automatically based on what is inside JSON object
