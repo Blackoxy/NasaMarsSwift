@@ -8,6 +8,18 @@
 
 import Foundation
 
+struct NasaRequest {
+    let resourceUrl: URL
+    let API_KEY = "0SSNRR10zUmvE4dfJoRTz9tqCmZ4lfTvzBHkdj4e"
+    
+    init() {
+        let earthDate = "2015-6-3"
+        let resourceString = "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=\(earthDate)&api_key=\(API_KEY)"
+        guard let resourceUrl = URL(string: resourceString) else {fatalError()}
+        self.resourceUrl = resourceUrl
+    }
+}
+
 enum NasaError: Error {
     case noDataAvailable
     case cantProcessData

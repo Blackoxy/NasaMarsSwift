@@ -9,16 +9,17 @@
 import Foundation
 import UIKit
 
-class DataViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
+class DataViewController: UIViewController {
+    
     
     public static func create() -> DataViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         return storyboard.instantiateInitialViewController() as! DataViewController
     }
-
+    
     @IBOutlet weak var tableView: UITableView!
     
-    var nasaData = [Photo]() {
+    var nasaData = [MarsPhotos]() {
         didSet {
             DispatchQueue.main.async { [weak self] in
                 self?.tableView?.reloadData()
@@ -37,17 +38,19 @@ class DataViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.tableView?.dataSource = self
     }
     
-    func dlJSON(completion: @escaping (Result<[Photo], NasaError>) -> Void) {
+    func dlJSON(completion: @escaping (Result<[MarsPhotos], NasaError>) -> Void) {
         let request = NasaRequest()
         URLSession.shared.dataTask(with: request.resourceUrl) {(data, response, err) in
             guard let data = data else {
                 completion(.failure(.noDataAvailable))
                 return
             }
-
+            
             do {
-                            let nasaDescription = try JSONDecoder().decode(Photo.self, from: data)
-                            self.nasaData = [nasaDescription]
+                let json = try JSONSerialization.jsonObject(with: data, options: [])
+                print(json)
+                let nasaDescription = try JSONDecoder().decode(MarsPhotos.self, from: data)
+                self.nasaData = [nasaDescription]
                 completion(.success(self.nasaData))
                 print(nasaDescription)
                 
@@ -56,10 +59,14 @@ class DataViewController: UIViewController, UITableViewDelegate, UITableViewData
                 print("Error serializing json:", jsonErr)
             }
             completion(.success(self.nasaData))
-
-    }.resume()
-}
+            
+        }.resume()
+    }
     
+    
+}
+
+extension DataViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return nasaData.count
     }
@@ -67,18 +74,29 @@ class DataViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let request = NasaRequest()
         let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
-        let photo = nasaData[indexPath.row]
+        let photo = nasaData[indexPath.row].photos[indexPath.row]
         if let url = URL(string: photo.img_src) {
             URLSession.shared.downloadTask(with: request.resourceUrl){
                 url, URLResponse, error in
                 if let url = url {
                     if let string = try? String(contentsOf: url){
-                        print(string)
+                        //wtf to all this..
                     }
                 }
             }
+            print(url)
         }
         return cell
+    }
+    
+    func setCellImage(_ cell: NasaTableViewCell, forPayload payload: MarsPhotos ) {
+//        wtf..
+//        guard image != nil else { return }
+//        cell.setProfilePicture(image, forPayload: payload)
+    }
+    
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        return nil
     }
 }
 

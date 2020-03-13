@@ -7,16 +7,22 @@
 //
 
 import Foundation
+import UIKit
 
-struct NasaRequest {
-    let resourceUrl: URL
-    let API_KEY = "W02q5h7TG6f54N0P39quJ0zh0pZ8YdcGqIVwvPIy"
+
+public func downloadImage(completion: @escaping(_ image: UIImage?) -> Void) {
+    let request = NasaRequest()
+    let photoData = [MarsPhotos]()
     
-    init() {
-        let earthDate = "2015-6-3"
-        let resourceString = "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=\(earthDate)&api_key=\(API_KEY))"
-        guard let resourceUrl = URL(string: resourceString) else {fatalError()}
-        self.resourceUrl = resourceUrl
+    //wtf..
+    if let url = URL(string: photoData[0].photos[0].img_src ) {
+        URLSession.shared.downloadTask(with: request.resourceUrl){
+            url, URLResponse, error in
+            if let url = url {
+                if let string = try? String(contentsOf: url){
+                    print(string)
+                }
+            }
+        }
     }
 }
-
